@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+
+n = Nokogiri::HTML::parse STDIN.read
+
+query = ARGV.select{ |o| o =~ /^\// }
+options = ARGV - query
+
+n.css(query.first).each do |element|
+  if options.any?{|o| ["-t", "--text"].include?(o) }
+    puts element.text
+  else
+    puts element
+  end
+end
