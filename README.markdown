@@ -1,6 +1,6 @@
 ## xp
 
-A Ruby Gem that queries an XML or HTML document fed through the stdin using XPath (provided as the arguments).
+A Ruby Gem that queries an XML or HTML document fed through the stdin using XPath (or even CSS selectors) (provided as the arguments).
 
 ### Installation
 
@@ -8,8 +8,8 @@ A Ruby Gem that queries an XML or HTML document fed through the stdin using XPat
 
 ### Usage
 
-    $ curl -s 'https://news.ycombinator.com' | xp --text '//td[class="title"]/a'
+    $ curl -s 'https://news.ycombinator.com' | xp --text '//td[class="title"]/a' 
 
-### Todo
+OR
 
-* Add CSS support too, despite the name ;)
+    $ curl -s 'https://news.ycombinator.com' | xp --text 'td.title > a'
