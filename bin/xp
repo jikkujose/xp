@@ -6,8 +6,8 @@ require 'nokogiri'
 
 n = Nokogiri::HTML::parse STDIN.read
 
-query = ARGV.select{ |o| o =~ /^\// }
-options = ARGV - query
+options = ARGV.select{ |o| o =~ /^\-/ }
+query = ARGV - options
 
 n.css(query.first).each do |element|
   if options.any?{|o| ["-t", "--text"].include?(o) }
