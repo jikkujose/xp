@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.summary = "A very simple commandline xpath parser."
   s.description = "A 10 line xpath parser using Nokogiri to be used in commandline."
   s.license = "MIT"
-  s.executables = ["bin/xp"]
+  s.executables = ["xp"]
 
   s.add_dependency "nokogiri"
 end
