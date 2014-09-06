@@ -1,11 +1,15 @@
-## Simple XPath querying bare bones gem
+## xp
 
-This is a simple gem that query an XML or HTML document fed through the stdin using XPath provided as the arguments.
+A Ruby Gem that queries an XML or HTML document fed through the stdin using XPath (provided as the arguments).
 
-### Installation:
+### Installation
 
     $ gem install xp
 
-### Todo:
+### Usage
 
-* Add CSS support too
+    $ curl -s 'https://news.ycombinator.com' | xp --text '//td[class="title"]/a'
+
+### Todo
+
+* Add CSS support too, despite the name ;)
