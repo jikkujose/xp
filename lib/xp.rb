@@ -1,10 +1,17 @@
 require 'nokogiri'
 require 'open-uri'
+require 'uri'
 require_relative './user_agents.rb'
 
 module XP
   def to_nokogiri
-    Nokogiri(self)
+    source = if url?
+               self.page_source
+             else
+               self
+             end
+
+    Nokogiri(source)
   end
 
   def page_source(user_agent_alias: :mac_firefox, user_agent: nil)
@@ -30,6 +37,18 @@ module XP
 
   def regex
     /.*\/(?<basename>.*)(?<extension>\.\w+)(\?.*)?/
+  end
+
+  def url?
+    self.length < 200 && self =~ URI::regexp
+  end
+
+  def css selector
+    self.to_nokogiri.css selector
+  end
+
+  def xpath selector
+    self.to_nokogiri.xpath selector
   end
 end
 

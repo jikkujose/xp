@@ -7,6 +7,8 @@ XPATH_RESULT = "<title>How You Know</title>\n"
 CSS_QUERY = 'title'
 CSS_RESULT = "<title>How You Know</title>\n"
 
+LYNX = 'http://www.delorie.com/web/lynxview.html'
+LYNX_TAGLINE = 'Lynx Viewer'
 SIMPLE_PAGE_URL = "http://w3m.sourceforge.net/"
 TEST_URL = 'http://qucentis.com/unavailable_404_link'
 TEST_FILE_URL = 'http://abc.com/file/hello.mov?key=123&id=569'
@@ -28,6 +30,7 @@ class TestXP < Minitest::Test
 
   def test_to_nokogiri
     assert_instance_of Nokogiri::HTML::Document, HTML.to_nokogiri
+    assert_equal LYNX_TAGLINE, LYNX.to_nokogiri.xpath('//title/text()').to_s
   end
 
   def test_conversion_to_nodeset
@@ -43,5 +46,15 @@ class TestXP < Minitest::Test
   def test_basename
     assert_equal TEST_FILE_URL.basename, TEST_FILE_BASENAME
     assert_equal TEST_FILE_URL.extension, TEST_FILE_EXTENSION
+  end
+
+  def test_css
+    assert_respond_to "", :css
+    assert_equal HTML.to_nokogiri.css(CSS_QUERY).to_html, HTML.css(CSS_QUERY).to_html
+  end
+
+  def test_xpath
+    assert_respond_to "", :xpath
+    assert_equal HTML.to_nokogiri.xpath(XPATH_QUERY).to_html, HTML.xpath(XPATH_QUERY).to_html
   end
 end
