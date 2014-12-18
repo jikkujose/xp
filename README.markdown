@@ -14,20 +14,25 @@ OR
 
     $ curl -s 'https://news.ycombinator.com' | xp --text 'td.title > a'
 
-The gem can also be used in Ruby scripts, by `requiring` the gem:
+The gem can also be used in Ruby scripts, by `requiring` the gem - `require 'xp'`.
+
+### Example
+
+The following one liner can download all Dribbble shots from its home page:
 
 ``` ruby
-require 'xp'
+'https://dribbble.com/'.css('.dribbble-link img').xpath('//img/@src').map { |link| link.text.download }
 ```
 
-For instance to get all the Dribbble shots in the home page we can do:
+### API
 
-``` ruby
-d_shots = 'https://dribbble.com/'.css('.dribbble-link img').xpath('//img/@src').map &:text
-```
+`xp` adds the following methods to the `String` class:
 
-A link in a string can be downloaded using `download` method. And in case you would like to download the Dribbble shots we have in the variable `d_shots`, just iterate it and call `download` on each like so:
-
-``` ruby
-d_shots.each &:download
-```
+Method                                                         | Return type               | Remarks
+-------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------
+`to_nokogiri`                                                  | `Nokogiri::XML::Document` | Converts a url or a page source to Nokogiri object
+`css(selector)`                                                | `String`                  | Filters a url or html string based on the selector
+`xpath(selector)`                                              | `Strng`                   | Filters a url or html string based on the selector
+`download(location: 'downloads', name: nil)`                   | `String`                  | Downloads the url in the string; can be customized via the optional parameters.
+`page_source(user_agent_alias: :mac_firefox, user_agent: nil)` | `String`                  | Gets the page source of a url; can be customized via optional parameters.
+`url?`                                                         | `Boolean`                 | Checks whether current string is a url.
