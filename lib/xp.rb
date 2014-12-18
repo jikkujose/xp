@@ -16,7 +16,7 @@ module XP
   end
 
   def download(location: 'downloads', name: nil)
-    FileUtils.mkdir_p location
+    ::FileUtils.mkdir_p location
 
     filename = (name || basename).to_s + extension
     File.open("#{location}/#{filename}", 'wb') do |f|
