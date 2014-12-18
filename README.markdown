@@ -4,15 +4,21 @@ Ruby gem that adds 4 new methods to String class that enables easy scraping of H
 
 ### Installation
 
-    $ gem install xp
+``` bash
+$ gem install xp
+```
 
 ### Usage
 
-    $ curl -s 'https://news.ycombinator.com' | xp --text '//td[class="title"]/a'
+``` bash
+$ curl -s 'https://news.ycombinator.com' | xp --text '//td[class="title"]/a'
+```
 
 OR
 
-    $ curl -s 'https://news.ycombinator.com' | xp --text 'td.title > a'
+``` bash
+$ curl -s 'https://news.ycombinator.com' | xp --text 'td.title > a'
+```
 
 The gem can also be used in Ruby scripts, by `requiring` the gem - `require 'xp'`.
 
