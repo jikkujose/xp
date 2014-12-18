@@ -50,11 +50,11 @@ class TestXP < Minitest::Test
 
   def test_css
     assert_respond_to "", :css
-    assert_equal HTML.to_nokogiri.css(CSS_QUERY).to_html, HTML.css(CSS_QUERY)
+    assert_equal HTML.to_nokogiri.css(CSS_QUERY).to_html, HTML.css(CSS_QUERY).to_html
   end
 
   def test_xpath
     assert_respond_to "", :xpath
-    assert_equal HTML.to_nokogiri.xpath(XPATH_QUERY).to_html, HTML.xpath(XPATH_QUERY)
+    assert_equal HTML.to_nokogiri.xpath(XPATH_QUERY).to_html, HTML.xpath(XPATH_QUERY).to_html
   end
 end

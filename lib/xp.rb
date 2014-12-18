@@ -40,11 +40,11 @@ module XP
   end
 
   def css selector
-    self.to_nokogiri.css(selector).to_html
+    self.to_nokogiri.css(selector).to_html.to_nokogiri
   end
 
   def xpath selector
-    self.to_nokogiri.xpath(selector).to_html
+    self.to_nokogiri.xpath(selector).to_html.to_nokogiri
   end
 end
 
