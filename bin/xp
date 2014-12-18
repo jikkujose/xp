@@ -1,18 +1,19 @@
-#!/usr/bin/env ruby
+#! /usr/bin/env ruby
 
-# $LOAD_PATH.unshift(File.expand_path("../../lib", "__FILE__"))
+require 'xp'
 
-require 'nokogiri'
+input = STDIN.read.to_nokogiri
 
-n = Nokogiri::HTML::parse STDIN.read
+$options = ARGV.select{ |o| o =~ /^\-/ }
 
-options = ARGV.select{ |o| o =~ /^\-/ }
-query = ARGV - options
-
-n.css(query.first).each do |element|
-  if options.any?{|o| ["-t", "--text"].include?(o) }
-    puts element.text
-  else
-    puts element
-  end
+def text_flag?
+  $options.any?{|o| ["-t", "--text"].include?(o) }
 end
+
+query = (ARGV - $options).first
+
+output = input.css(query).map do |element|
+  text_flag? ? element.text : element
+end
+
+puts output
