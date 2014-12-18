@@ -21,7 +21,7 @@ The gem can also be used in Ruby scripts, by `requiring` the gem - `require 'xp'
 The following one liner can download all Dribbble shots from its home page:
 
 ``` ruby
-'https://dribbble.com/'.css('.dribbble-link img').xpath('//img/@src').map { |link| link.text.download }
+'https://dribbble.com/'.css('.dribbble-link img').xpath('//img/@src').map(&:text).map(&:download)
 ```
 
 ### API
