@@ -1,6 +1,6 @@
 ## xp
 
-Ruby gem that adds 4 new methods to String class that enables easy scraping of HTML/XML documents.
+Ruby gem that adds some methods to String class for intuitive HTML/XML scraping.
 
 ### Installation
 
