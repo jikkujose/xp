@@ -17,35 +17,39 @@ module XP
 
   def download(location: 'downloads', name: nil)
     FileUtils.mkdir_p location
+
     filename = (name || basename).to_s + extension
     File.open("#{location}/#{filename}", 'wb') do |f|
       f.write open(self).read
     end
   end
 
+  def css(selector)
+    self.to_nokogiri.css(selector).to_html.to_nokogiri
+  end
+
+  def xpath(selector)
+    self.to_nokogiri.xpath(selector).to_html.to_nokogiri
+  end
+
+  private
+
+  def url?
+    self.length < 200 && !(self =~ /\A#{URI::regexp}\z/).nil?
+  end
+
   def basename
-    self.match(regex)[:basename]
+    self.match(regex)[:basename] if url?
   end
 
   def extension
-    self.match(regex)[:extension]
+    self.match(regex)[:extension] if url?
   end
 
   def regex
     /.*\/(?<basename>.*)(?<extension>\.\w+)(\?.*)?/
   end
 
-  def url?
-    self.length < 200 && self =~ /\A#{URI::regexp}\z/
-  end
-
-  def css selector
-    self.to_nokogiri.css(selector).to_html.to_nokogiri
-  end
-
-  def xpath selector
-    self.to_nokogiri.xpath(selector).to_html.to_nokogiri
-  end
 end
 
 String.send :include, XP

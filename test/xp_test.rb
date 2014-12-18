@@ -43,11 +43,6 @@ class TestXP < Minitest::Test
     assert_equal SIMPLE_PAGE_URL.page_source.to_nokogiri.xpath("//address/a/text()").to_html, "aito@fw.ipsj.or.jp"
   end
 
-  def test_basename
-    assert_equal TEST_FILE_URL.basename, TEST_FILE_BASENAME
-    assert_equal TEST_FILE_URL.extension, TEST_FILE_EXTENSION
-  end
-
   def test_css
     assert_respond_to "", :css
     assert_equal HTML.to_nokogiri.css(CSS_QUERY).to_html, HTML.css(CSS_QUERY).to_html
