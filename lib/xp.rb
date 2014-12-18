@@ -5,11 +5,7 @@ require_relative './user_agents.rb'
 
 module XP
   def to_nokogiri
-    source = if url?
-               self.page_source
-             else
-               self
-             end
+    source = url? ? self.page_source : self
 
     Nokogiri(source)
   end
@@ -40,15 +36,15 @@ module XP
   end
 
   def url?
-    self.length < 200 && self =~ URI::regexp
+    self.length < 200 && self =~ /\A#{URI::regexp}\z/
   end
 
   def css selector
-    self.to_nokogiri.css selector
+    self.to_nokogiri.css(selector).to_html
   end
 
   def xpath selector
-    self.to_nokogiri.xpath selector
+    self.to_nokogiri.xpath(selector).to_html
   end
 end
 
