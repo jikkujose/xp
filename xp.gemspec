@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name = "xp"
-  s.version = "2.0.0"
+  s.version = "2.0.1"
   s.authors = ["Jikku Jose"]
   s.email = ['jikkujose@gmail.com']
   s.summary = "Ruby gem for intuitive web scraping"
