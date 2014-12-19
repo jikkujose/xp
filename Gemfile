@@ -1,6 +1,6 @@
 source 'http://www.rubygems.org'
 
-gem 'nokogiri'
+gemspec
 
 group :test do
   gem 'minitest'

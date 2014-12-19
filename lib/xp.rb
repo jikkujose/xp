@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'uri'
-require_relative './user_agents.rb'
+require_relative './xp/user_agents'
 
 module XP
   def to_nokogiri
