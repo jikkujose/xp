@@ -40,3 +40,14 @@ Method                                                         | Return type    
 `download(location: 'downloads', name: nil)`                   | `String`                  | Downloads the url in the string (can be customized via the optional parameters)
 `page_source(user_agent_alias: :mac_firefox, user_agent: nil)` | `String`                  | Gets the page source of a url (can be customized via optional parameters)
 `url?`                                                         | `Boolean`                 | Checks whether current string is a url
+
+### Todo
+
+1. Move to Thor for CLI app
+2. Improve Tests
+3. Add CI
+4. Improve error handling
+
+### Known issues
+
+1. Return type is still messed.
