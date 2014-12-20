@@ -5,14 +5,14 @@ require_relative './xp/user_agents'
 
 module XP
   def to_nokogiri
-    source = url? ? self.page_source : self
+    source = url? ? page_source : self
 
     Nokogiri(source)
   end
 
   def page_source(user_agent_alias: :mac_firefox, user_agent: nil)
     user_agent ||= USER_AGENTS[user_agent_alias]
-    open(self, "User-Agent" => user_agent).read
+    open(self, 'User-Agent' => user_agent).read
   end
 
   def download(location: 'downloads', name: nil)
@@ -25,31 +25,30 @@ module XP
   end
 
   def css(selector)
-    self.to_nokogiri.css(selector).to_html.to_nokogiri
+    to_nokogiri.css(selector).to_html.to_nokogiri
   end
 
   def xpath(selector)
-    self.to_nokogiri.xpath(selector).to_html.to_nokogiri
+    to_nokogiri.xpath(selector).to_html.to_nokogiri
   end
 
   private
 
   def url?
-    self.length < 200 && !(self =~ /\A#{URI::regexp}\z/).nil?
+    length < 200 && !(self =~ /\A#{URI.regexp}\z/).nil?
   end
 
   def basename
-    self.match(regex)[:basename] if url?
+    match(regex)[:basename] if url?
   end
 
   def extension
-    self.match(regex)[:extension] if url?
+    match(regex)[:extension] if url?
   end
 
   def regex
     /.*\/(?<basename>.*)(?<extension>\.\w+)(\?.*)?/
   end
-
 end
 
 String.send :include, XP

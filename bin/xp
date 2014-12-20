@@ -4,16 +4,16 @@ require 'xp'
 
 input = STDIN.read.to_nokogiri
 
-$options = ARGV.select{ |o| o =~ /^\-/ }
+options = ARGV.select { |o| o =~ /^\-/ }
 
-def text_flag?
-  $options.any?{|o| ["-t", "--text"].include?(o) }
+def text_flag?(options)
+  options.any? { |o| ['-t', '--text'].include?(o) }
 end
 
-query = (ARGV - $options).first
+query = (ARGV - options).first
 
 output = input.css(query).map do |element|
-  text_flag? ? element.text : element
+  text_flag?(options) ? element.text : element
 end
 
 puts output
